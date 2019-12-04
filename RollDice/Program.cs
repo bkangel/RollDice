@@ -11,36 +11,34 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            int DICE = 45;
-            int TRYCOUNT = 6;
+            int DICE = 3;
+            int TRYCOUNT = 30;
 
             if (!System.Diagnostics.Debugger.IsAttached)
             {
-                if (args.Count() < 3)
+                if (args.Count() < 2)
                 {
                     Console.WriteLine($"Usage : {Path.GetFileName(Assembly.GetEntryAssembly().Location)} [n-Sided Dice] [try count]");
                     return;
                 }
 
-                DICE = Int32.Parse(args[1]);
-                TRYCOUNT = Int32.Parse(args[2]);
+                DICE = Int32.Parse(args[0]);
+                TRYCOUNT = Int32.Parse(args[1]);
             }
-            else
-            {
-                RollDice r = new RollDice(DICE, TRYCOUNT);
-                r.Calc2();
-            }
+
+            RollDice r = new RollDice(DICE, TRYCOUNT);
+            r.Calc2();
         }
     }
 
     public class Element
     {
-        public Element(int c, int s)
+        public Element(long c, int s)
         {
             @case = c;
             sum = s;
         }
-        public int @case { get; set; }
+        public long @case { get; set; }
         public int sum { get; set; }
 
 
@@ -99,7 +97,7 @@ namespace ConsoleApp1
 
         private Element NextDice2(long n, Element[] a, int l)
         {
-            int x = 0;
+            long x = 0;
 
             for (int i = 1; i <= Face; ++i)
             {
